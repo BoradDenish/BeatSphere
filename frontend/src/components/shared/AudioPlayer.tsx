@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
-import { formatDuration, cn } from '@/lib/utils';
+import { formatDuration, cn, getMediaUrl } from '@/lib/utils';
 import { usePlayerStore } from '@/stores/playerStore';
 
 export function AudioPlayer() {
@@ -29,7 +29,7 @@ export function AudioPlayer() {
 
   useEffect(() => {
     if (isOpen && audioRef.current && media?.fileUrl) {
-      const url = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${media.fileUrl}`;
+      const url = getMediaUrl(media.fileUrl);
       if (audioRef.current.src !== url) {
         audioRef.current.src = url;
         audioRef.current.load();
